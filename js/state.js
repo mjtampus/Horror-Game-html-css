@@ -1,4 +1,4 @@
-const TOTAL_NIGHTS = 5;
+const TOTAL_NIGHTS = 10;
 
 const S = {
   EMPTY:0,
@@ -15,7 +15,6 @@ let G = {
   gameOver:false,
   started:false,
   scenario:S.EMPTY,
-  timers: [],
   intervals:[],
   nightToken: 0,
 };

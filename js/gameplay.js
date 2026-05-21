@@ -21,7 +21,6 @@ function startGame(){
       fn();
     }, delay);
   
-    G.intervals.push(id);
     return id;
   }
 
@@ -34,7 +33,6 @@ function startGame(){
       fn();
     }, delay);
   
-    G.timers.push(id);
     return id;
   }  
   
@@ -68,6 +66,8 @@ function startGame(){
     $('hall-monster').classList.toggle('show',G.scenario===S.MONSTER_OUTSIDE);
     $('monster-shadow').classList.toggle('show',G.scenario===S.MONSTER_OUTSIDE);
     $('hall-neighbor').classList.toggle('show',G.scenario===S.NEIGHBOR);
+    randomiseNeighbor();
+    randomiseMonster();
   
     setLights(true);
     const flavors={
@@ -229,6 +229,7 @@ function toggleLight(){
     stopKnockSound();
     G.lives--;G.gameOver=true;clearHints();buildHearts();
     if(G.lives<=0){
+      stopMusicFade();
       $('death-body').innerHTML=msg.replace(/\n/g,'<br>');
       $('death-flavor').textContent=`you survived ${G.survived} night${G.survived!==1?'s':''}.`;
       $('death-screen').classList.add('show');
@@ -238,7 +239,8 @@ function toggleLight(){
     }
   }
   function winGame(){
-    stopKnockSound(); 
+    stopMusicFade();
+    stopKnockSound();
     G.gameOver=true;
     $('win-body').innerHTML=`You endured all ${TOTAL_NIGHTS} nights.<br>You learned who to let in,<br>what to shut out,<br>and when darkness is your only weapon.<br><br><span style="color:#224422;font-size:12px;">...or did it simply let you live?</span>`;
     $('win-screen').classList.add('show');
@@ -247,7 +249,7 @@ function toggleLight(){
     $('intro-screen').style.display='none';G.started=true;buildHearts();startNight();
   }
   function restartGame(){
-    stopKnockSound();
+    startMusic();
     G={night:1,lives:3,survived:0,lightsOn:true,peeking:false,scenario:S.EMPTY,peekRevealed:false,canAct:false,gameOver:false,started:true,crossUsed:false};
     $('death-screen').classList.remove('show');$('win-screen').classList.remove('show');$('peep-overlay').classList.remove('show');
     clearHints();buildHearts();$('survived-num').textContent=0;$('night-num').textContent=1;startNight();

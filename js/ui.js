@@ -2,11 +2,6 @@ const knockSound = new Audio('./assets/audio/knock.mp3');
 knockSound.volume = 0.8;
 knockSound.preload = 'auto';
 
-function stopKnockSound(){
-  knockSound.pause();
-  knockSound.currentTime = 0;
-}
-
 function setLights(on){
     G.lightsOn=on;
     $('room').classList.toggle('lit',on);$('room').classList.toggle('dark',!on);

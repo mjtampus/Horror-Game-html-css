@@ -176,43 +176,8 @@
         <div id="hall-light"></div>
         <div id="hall-far-door"></div>
         <div id="monster-shadow"></div>
-        <div id="hall-monster">
-          <svg width="100" height="150" viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-            <ellipse cx="50" cy="100" rx="32" ry="44" fill="#150a0a"/>
-            <rect x="40" y="58" width="20" height="20" fill="#150a0a"/>
-            <ellipse cx="50" cy="46" rx="26" ry="30" fill="#1a0c0c"/>
-            <ellipse cx="38" cy="40" rx="9" ry="11" fill="#0d0505"/><ellipse cx="62" cy="40" rx="9" ry="11" fill="#0d0505"/>
-            <ellipse cx="38" cy="40" rx="6" ry="7" fill="#cc0000"/><ellipse cx="62" cy="40" rx="6" ry="7" fill="#cc0000"/>
-            <ellipse cx="38" cy="40" rx="3" ry="4" fill="#ff2200"/><ellipse cx="62" cy="40" rx="3" ry="4" fill="#ff2200"/>
-            <circle cx="38" cy="40" r="1.5" fill="#000"/><circle cx="62" cy="40" r="1.5" fill="#000"/>
-            <circle cx="36" cy="38" r="1" fill="rgba(255,255,255,0.3)"/><circle cx="60" cy="38" r="1" fill="rgba(255,255,255,0.3)"/>
-            <path d="M28 68 Q50 84 72 68" fill="none" stroke="#550000" stroke-width="2"/>
-            <path d="M33 68 L30 76 M40 72 L39 80 M50 74 L50 82 M60 72 L61 80 M67 68 L70 76" stroke="#cc4444" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-            <path d="M18 90 Q0 110 6 130" stroke="#150a0a" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M82 90 Q100 110 94 130" stroke="#150a0a" stroke-width="12" fill="none" stroke-linecap="round"/>
-            <path d="M6 130 L0 140 M6 130 L6 142 M6 130 L13 140" stroke="#880000" stroke-width="2" fill="none" stroke-linecap="round"/>
-            <path d="M94 130 L88 140 M94 130 L94 142 M94 130 L100 140" stroke="#880000" stroke-width="2" fill="none" stroke-linecap="round"/>
-          </svg>
-        </div>
+        <div id="hall-monster"></div>
         <div id="hall-neighbor">
-          <svg width="80" height="130" viewBox="0 0 80 130" xmlns="http://www.w3.org/2000/svg">
-            <rect x="20" y="70" width="40" height="55" rx="4" fill="#2a3a2a"/>
-            <rect x="28" y="70" width="24" height="55" rx="2" fill="#334433"/>
-            <ellipse cx="40" cy="52" rx="20" ry="22" fill="#c8a882"/>
-            <ellipse cx="40" cy="34" rx="21" ry="12" fill="#3a2810"/>
-            <rect x="19" y="34" width="5" height="20" rx="2" fill="#3a2810"/>
-            <rect x="56" y="34" width="5" height="20" rx="2" fill="#3a2810"/>
-            <ellipse cx="33" cy="50" rx="4" ry="4.5" fill="#fff"/><ellipse cx="47" cy="50" rx="4" ry="4.5" fill="#fff"/>
-            <circle cx="33" cy="51" r="2.5" fill="#5a3820"/><circle cx="47" cy="51" r="2.5" fill="#5a3820"/>
-            <circle cx="32" cy="50" r="0.8" fill="#fff"/><circle cx="46" cy="50" r="0.8" fill="#fff"/>
-            <path d="M32 60 Q40 66 48 60" fill="none" stroke="#a07050" stroke-width="1.5" stroke-linecap="round"/>
-            <path d="M20 85 Q8 90 10 105" stroke="#2a3a2a" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <path d="M60 85 Q72 80 70 95" stroke="#2a3a2a" stroke-width="10" fill="none" stroke-linecap="round"/>
-            <ellipse cx="10" cy="107" rx="7" ry="6" fill="#c8a882"/>
-            <rect x="66" y="82" width="5" height="18" rx="1" fill="#d4a04a"/>
-            <ellipse cx="68" cy="80" rx="4" ry="6" fill="#ffdd44" opacity="0.9"/>
-            <ellipse cx="68" cy="78" rx="2" ry="3" fill="#fff" opacity="0.6"/>
-          </svg>
         </div>
         <div id="hall-rim"></div>
       </div>
@@ -328,32 +293,14 @@
 
 </div>
 
-<!-- AUDIO -->
-<div id="audio-bar">
-
-  <label>♪ AMBIANCE</label>
-
-  <input
-    type="range"
-    id="vol-slider"
-    min="0"
-    max="1"
-    step="0.05"
-    value="0.3"
-  >
-
-  <button id="mute-btn">
-    MUTE
-  </button>
-
-</div>
-
 <script src="./js/state.js"></script>
 <script src="./js/audio/backgroundmusic.js"></script>
 <script src="./js/ui.js"></script>
 <script src="./js/gameplay.js"></script>
 <script src="./js/main.js"></script>
 <script src="./js/audio/ingamemusic.js"></script>
+<script src="./js/monster/monster.js"></script>
+<script src="./js/neighbor/neighbor.js"></script>
 
 </body>
 </html>
