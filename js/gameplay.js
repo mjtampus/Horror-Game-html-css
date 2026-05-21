@@ -9,8 +9,40 @@ function startGame(){
   
     startNight();
   }
+
+  function gameInterval(fn, delay){
+    const token = G.nightToken;
+  
+    const id = setInterval(() => {
+      if (G.nightToken !== token || G.gameOver) {
+        clearInterval(id);
+        return;
+      }
+      fn();
+    }, delay);
+  
+    G.intervals.push(id);
+    return id;
+  }
+
+  function gameTimeout(fn, delay){
+    const token = G.nightToken;
+  
+    const id = setTimeout(() => {
+      if (G.nightToken !== token) return;
+      if (G.gameOver) return;
+      fn();
+    }, delay);
+  
+    G.timers.push(id);
+    return id;
+  }  
   
   function startNight(){
+    stopKnockSound();
+  
+    G.nightToken++;
+
     if(G.night>TOTAL_NIGHTS){winGame();return;}
     G.canAct=false;G.peekRevealed=false;G.crossUsed=false;
     clearHints();$('night-num').textContent=G.night;
@@ -22,13 +54,15 @@ function startGame(){
     else              G.scenario=S.EMPTY;
   
     if(G.scenario===S.MONSTER_INSIDE){
-      setTimeout(()=>{
-        $('scratches').classList.add('show');$('scratches').style.opacity='1';
-      },1400);
+      gameTimeout(() => {
+        $('scratches').classList.add('show');
+        $('scratches').style.opacity = '1';
+      }, 1400);
     }
+
     if(G.scenario===S.NEIGHBOR||G.scenario===S.MONSTER_OUTSIDE){
-      setTimeout(()=>knockDoor(),900);
-      setTimeout(()=>knockDoor(),2100);
+      gameTimeout(() => knockDoor(), 900);
+      gameTimeout(() => knockDoor(), 2100);
     }
   
     $('hall-monster').classList.toggle('show',G.scenario===S.MONSTER_OUTSIDE);
@@ -49,40 +83,34 @@ function startGame(){
       G.canAct=true;
     
       if(G.scenario===S.MONSTER_INSIDE){
-    
-        let countdown=7;
-    
-        const timer=setInterval(()=>{
-    
-          if(G.gameOver){
-            clearInterval(timer);
-            return;
-          }
-    
+        
+        let countdown = 7;
+
+        const timer = gameInterval(() => {
+        
           if(G.crossUsed){
             clearInterval(timer);
             return;
           }
-    
+        
           countdown--;
-    
-          if(countdown<=0){
-    
+        
+          if(countdown <= 0){
+        
             clearInterval(timer);
-    
-            if(!G.canAct)return;
-    
-            G.canAct=false;
-    
-            flickerThen(()=>{
-              setTimeout(()=>{
-                triggerDeath('You die ghost is inside, you didn\'t repel the ghost');
-              },760);
+        
+            if(!G.canAct) return;
+        
+            G.canAct = false;
+        
+            flickerThen(() => {
+              gameTimeout(() => {
+                triggerDeath("You die ghost is inside, you didn't repel the ghost");
+              }, 760);
             });
-    
           }
-    
-        },1000);
+        
+        }, 1000);
     
       }
     
@@ -198,6 +226,7 @@ function toggleLight(){
   }
   
   function triggerDeath(msg,sub){
+    stopKnockSound();
     G.lives--;G.gameOver=true;clearHints();buildHearts();
     if(G.lives<=0){
       $('death-body').innerHTML=msg.replace(/\n/g,'<br>');
@@ -209,6 +238,7 @@ function toggleLight(){
     }
   }
   function winGame(){
+    stopKnockSound(); 
     G.gameOver=true;
     $('win-body').innerHTML=`You endured all ${TOTAL_NIGHTS} nights.<br>You learned who to let in,<br>what to shut out,<br>and when darkness is your only weapon.<br><br><span style="color:#224422;font-size:12px;">...or did it simply let you live?</span>`;
     $('win-screen').classList.add('show');
@@ -217,6 +247,7 @@ function toggleLight(){
     $('intro-screen').style.display='none';G.started=true;buildHearts();startNight();
   }
   function restartGame(){
+    stopKnockSound();
     G={night:1,lives:3,survived:0,lightsOn:true,peeking:false,scenario:S.EMPTY,peekRevealed:false,canAct:false,gameOver:false,started:true,crossUsed:false};
     $('death-screen').classList.remove('show');$('win-screen').classList.remove('show');$('peep-overlay').classList.remove('show');
     clearHints();buildHearts();$('survived-num').textContent=0;$('night-num').textContent=1;startNight();

@@ -1,4 +1,4 @@
-const TOTAL_NIGHTS = 10;
+const TOTAL_NIGHTS = 5;
 
 const S = {
   EMPTY:0,
@@ -14,7 +14,10 @@ let G = {
   lightsOn:true,
   gameOver:false,
   started:false,
-  scenario:S.EMPTY
+  scenario:S.EMPTY,
+  timers: [],
+  intervals:[],
+  nightToken: 0,
 };
 
 const $ = id => document.getElementById(id);

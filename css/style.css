@@ -154,7 +154,12 @@ body{background:#000;font-family:'Special Elite',cursive;overflow:hidden;width:1
 #jumpscare-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;pointer-events:none;}
 #jumpscare-overlay.show{display:flex;animation:js-bg 2s ease-out forwards;}
 @keyframes js-bg{0%{background:rgba(0,0,0,0);}4%{background:rgba(100,0,0,0.92);}25%{background:rgba(60,0,0,0.8);}100%{background:rgba(0,0,0,0);}}
-#jumpscare-face{opacity:0;}
+#jumpscare-face{
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover; /* fills entire screen */
+  display: block;
+}
 #jumpscare-overlay.show #jumpscare-face{animation:js-face 2s ease-out forwards;}
 @keyframes js-face{
   0%  {transform:scale(0.04) rotate(-12deg);opacity:0;}
