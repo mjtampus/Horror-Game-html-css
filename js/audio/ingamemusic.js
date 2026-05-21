@@ -1,4 +1,4 @@
-const JumpscareAudio = new Audio('./assets/audio/jumpscare/jumpscare.mp3');
+const JumpscareAudio = new Audio('./assets/audio/jumpscare/jumpscare_scream.mp3');
 JumpscareAudio.volume = 1;
 
 function playScare(){
@@ -11,16 +11,18 @@ function playScare(){
       o.connect(g);g.connect(masterGain);o.start(t);o.stop(t+1.7);
     });
   }
-  
 
-     
   function playShockSound() {
        JumpscareAudio.currentTime = 0;
      
        JumpscareAudio.play().catch(err => {
          console.log("Audio play failed:", err);
        });
-
-       
      }
+ 
+     
+  function stopKnockSound(){
+      knockSound.pause();
+      knockSound.currentTime = 0;
+  }   
   

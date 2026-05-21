@@ -152,23 +152,22 @@ body{background:#000;font-family:'Special Elite',cursive;overflow:hidden;width:1
 
 /* ── JUMPSCARE ── */
 #jumpscare-overlay{display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center;pointer-events:none;}
-#jumpscare-overlay.show{display:flex;animation:js-bg 2s ease-out forwards;}
-@keyframes js-bg{0%{background:rgba(0,0,0,0);}4%{background:rgba(100,0,0,0.92);}25%{background:rgba(60,0,0,0.8);}100%{background:rgba(0,0,0,0);}}
+#jumpscare-overlay.show{display:flex;}
 #jumpscare-face{
   width: 100vw;
   height: 100vh;
   object-fit: cover; /* fills entire screen */
   display: block;
 }
-#jumpscare-overlay.show #jumpscare-face{animation:js-face 2s ease-out forwards;}
+#jumpscare-overlay.show #jumpscare-face{animation:js-face 10s ease-out forwards;}
 @keyframes js-face{
   0%  {transform:scale(0.04) rotate(-12deg);opacity:0;}
   5%  {transform:scale(1.5)  rotate(4deg);opacity:1;}
   12% {transform:scale(1.1)  rotate(-2deg);opacity:1;}
   20% {transform:scale(1.25) rotate(2deg);opacity:1;}
-  40% {transform:scale(1.05) rotate(0);opacity:0.95;}
-  75% {transform:scale(0.9);opacity:0.5;}
-  100%{transform:scale(0.15);opacity:0;}
+  80% {transform:scale(1.05) rotate(0);opacity:1;}
+  90% {transform:scale(1.05) rotate(0);opacity:1;}
+  100%{transform:scale(1.05) rotate(0);opacity:0;}
 }
 @keyframes js-shake{
   0%,100%{transform:translate(0,0) rotate(0);}
