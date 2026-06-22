@@ -45,8 +45,6 @@ function knockDoor(){
   knockSound.currentTime = 0;
   knockSound.play();
 
-  console.log("knocked");
-
   const d = $('door-el');
 
   d.classList.remove('knocking');

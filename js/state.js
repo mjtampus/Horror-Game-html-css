@@ -20,13 +20,15 @@ let G = {
 };
 
 const DIFFICULTY = {
-  normal: {
-    insideTimer: 700,
+  easy: {
+    insideTimer: 90,
   },
-
+  normal: {
+    insideTimer: 45,
+  },
   hard: {
-    insideTimer: 4,
-  }
+    insideTimer: 15,
+  },
 };
 
 const $ = id => document.getElementById(id);
