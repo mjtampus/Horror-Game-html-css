@@ -47,17 +47,28 @@ function startGame(){
     G.scenarioResolved=false;
     clearHints();$('night-num').textContent=G.night;
   
-    const roll=Math.random();
-    if     (roll<0.28)G.scenario=S.MONSTER_OUTSIDE;
-    else if(roll<0.52)G.scenario=S.MONSTER_INSIDE;
-    else if(roll<0.78)G.scenario=S.NEIGHBOR;
-    else              G.scenario=S.EMPTY;
-  
+    // Scale monster probability across 10 nights (28%→40% outside, 24%→32% inside)
+    const nightScale = (G.night - 1) / (TOTAL_NIGHTS - 1);
+    const pOut = 0.28 + nightScale * 0.12;
+    const pIn  = pOut + 0.24 + nightScale * 0.08;
+    const pNeighbor = pIn + 0.26;
+    const roll = Math.random();
+    if      (roll < pOut)     G.scenario = S.MONSTER_OUTSIDE;
+    else if (roll < pIn)      G.scenario = S.MONSTER_INSIDE;
+    else if (roll < pNeighbor)G.scenario = S.NEIGHBOR;
+    else                      G.scenario = S.EMPTY;
+
     if(G.scenario===S.MONSTER_INSIDE){
       gameTimeout(() => {
         $('scratches').classList.add('show');
         $('scratches').style.opacity = '1';
       }, 1400);
+      // Ghost fades in after scratches warn the player
+      gameTimeout(() => {
+        const gh = $('room-ghost');
+        gh.style.opacity = '';
+        gh.classList.add('show');
+      }, 2500);
     }
 
     if(G.scenario===S.NEIGHBOR||G.scenario===S.MONSTER_OUTSIDE){
@@ -240,7 +251,9 @@ function toggleLight(){
     startNight();
   }
   function restartGame(){
+    const savedDifficulty = G.difficulty;
     G={night:1,lives:3,survived:0,lightsOn:true,peeking:false,scenario:S.EMPTY,peekRevealed:false,canAct:false,gameOver:false,started:true,crossUsed:false,nightToken:0,insideTimer:0};
+    G.difficulty = savedDifficulty;
     clearInterval(G.timerInterval);
     startMusic();
     $('death-screen').classList.remove('show');$('win-screen').classList.remove('show');$('peep-overlay').classList.remove('show');
@@ -297,7 +310,7 @@ function startDeathCountdown(seconds){
     $('timer-num').textContent = countdown;
 
     // RED WARNING
-    if(countdown <= 2){
+    if(countdown <= 5){
 
       $('timer-num').classList.add('danger');
 
